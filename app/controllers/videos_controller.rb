@@ -5,11 +5,11 @@ class VideosController < ApplicationController
   end
 
   def new
-
+    @video = Video.new
   end
 
   def create
-    Video.create(video_params)
+    @video = Video.create(video_params)
     redirect_to videos_path
   end
 

@@ -8,4 +8,16 @@ feature 'videos' do
       expect(page).to have_link 'Add a video'
     end
   end
+
+  context 'videos have been added' do
+    before do
+      Video.create(link: 'https://youtu.be/gId4LfQMqbQ', title: 'Kathryn Joseph - The Bird')
+    end
+
+    scenario 'display videos' do
+      visit '/videos'
+      expect(page).to have_content 'Kathryn Joseph - The Bird'
+      expect(page).to have_selector('img')
+    end
+  end
 end

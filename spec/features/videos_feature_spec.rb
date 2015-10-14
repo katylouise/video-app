@@ -20,4 +20,17 @@ feature 'videos' do
       expect(page).to have_selector('img')
     end
   end
+
+  context 'adding videos' do
+    scenario 'prompts user to fill out form, then adds a video to the homepage' do
+      visit '/videos'
+      click_link 'Add a video'
+      fill_in 'Link', with: 'https://youtu.be/gId4LfQMqbQ'
+      fill_in 'Title', with: 'Kathryn Joseph - The Bird'
+      click_button 'Add Video'
+      expect(page).to have_content 'Kathryn Joseph - The Bird'
+      expect(page).to have_selector('img')
+      expect(current_path).to eq '/videos'
+    end
+  end
 end

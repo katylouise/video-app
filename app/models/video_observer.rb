@@ -4,8 +4,8 @@ class VideoObserver < ActiveRecord::Observer
     video = Yt::Video.new url: resource.link
     resource.uid = video.id
     resource.title = video.title
-  # rescue YT::Errors::NoItems
-  #   resource.title = ''
+  rescue YT::Errors::NoItems
+    resource.title = ''
   end
 
 end

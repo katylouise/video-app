@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'rails-observers'
 gem 'haml'
 gem 'yt'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

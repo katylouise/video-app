@@ -2,7 +2,11 @@
   - @videos.each do |video|
     = link_to image_tag("https://img.youtube.com/vi/#{video.uid}/mqdefault.jpg", alt: video.title, class: 'img-rounded'), "https://www.youtube.com/watch?v=#{video.uid}", target: '_blank', class: 'video-thumbnail'
     %h3.caption= video.title
+    = link_to 'Tag video', new_video_tag_path(video)
     = link_to 'Delete video', video_path(video), method: :delete
+    - if video.tags.any?
+      - video.tags.each do |tag|
+        %h3.tag= "#{tag.name}"
 - else
   No videos added yet...
 

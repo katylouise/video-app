@@ -1,6 +1,6 @@
 - if @videos.any?
   - @videos.each do |video|
-    = link_to image_tag("https://img.youtube.com/vi/#{video.uid}/mqdefault.jpg", alt: video.title, class: 'img-rounded'), "https://www.youtube.com/watch?v=#{video.uid}", target: '_blank'
+    = link_to image_tag("https://img.youtube.com/vi/#{video.uid}/mqdefault.jpg", alt: video.title, class: 'img-rounded'), "https://www.youtube.com/watch?v=#{video.uid}", target: '_blank', class: 'video-thumbnail'
     %h3.caption= video.title
 - else
   No videos added yet...

@@ -11,12 +11,12 @@ feature 'videos' do
 
   context 'videos have been added' do
     before do
-      Video.create(link: 'https://youtu.be/gId4LfQMqbQ', title: 'Kathryn Joseph - The Bird')
+      Video.create(link: 'https://youtu.be/gId4LfQMqbQ')
     end
 
     scenario 'display videos' do
       visit '/videos'
-      expect(page).to have_content 'Kathryn Joseph - The Bird'
+      expect(page).to have_content 'Kathryn Joseph \\\\ the bird (original)'
       expect(page).to have_selector('img')
       expect(page).not_to have_content('No videos added yet...')
     end
@@ -27,20 +27,22 @@ feature 'videos' do
       visit '/videos'
       click_link 'Add a video'
       fill_in 'Link', with: 'https://youtu.be/gId4LfQMqbQ'
-      fill_in 'Title', with: 'Kathryn Joseph - The Bird'
       click_button 'Add Video'
-      expect(page).to have_content 'Kathryn Joseph - The Bird'
+      expect(page).to have_content 'Kathryn Joseph \\\\ the bird (original)'
       expect(page).to have_selector('img')
       expect(current_path).to eq '/videos'
     end
   end
 
   context 'viewing videos' do
-    let(:video){ Video.create(link: 'https://youtu.be/gId4LfQMqbQ', title: 'Kathryn Joseph - The Bird') }
+    before do
+      Video.create(link: 'https://youtu.be/gId4LfQMqbQ')
+    end
 
-    scenario 'lets a user view a video' do
+    scenario 'allows a user to view a video on Youtube' do
       visit '/videos'
-
+      find('.video-thumbnail').click
+      expect(response).to redirect_to "https://www.youtube.com/watch?v=#{video.uid}"
     end
   end
 end

@@ -11,10 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151016111936) do
+ActiveRecord::Schema.define(version: 20151016133727) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "tags", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tags_videos", id: false, force: :cascade do |t|
+    t.integer "tag_id",   null: false
+    t.integer "video_id", null: false
+  end
+
+  add_index "tags_videos", ["tag_id", "video_id"], name: "index_tags_videos_on_tag_id_and_video_id", using: :btree
+  add_index "tags_videos", ["video_id", "tag_id"], name: "index_tags_videos_on_video_id_and_tag_id", using: :btree
 
   create_table "videos", force: :cascade do |t|
     t.string   "link"

@@ -35,14 +35,21 @@ feature 'videos' do
   end
 
   context 'viewing videos' do
-    before do
-      Video.create(link: 'https://youtu.be/gId4LfQMqbQ')
-    end
+    # before do
+    #   video = Video.create(link: 'https://youtu.be/gId4LfQMqbQ')
+    # end
 
     scenario 'allows a user to view a video on Youtube' do
+      Capybara.current_driver = :selenium
       visit '/videos'
+      click_link 'Add a video'
+      fill_in 'Link', with: 'https://youtu.be/gId4LfQMqbQ'
+      click_button 'Add Video'
       find('.video-thumbnail').click
-      expect(response).to redirect_to "https://www.youtube.com/watch?v=#{video.uid}"
+      within_window(switch_to_window(windows.last)) do
+        expect(current_url).to eq("https://www.youtube.com/watch?v=gId4LfQMqbQ")
+      end
+      Capybara.use_default_driver
     end
   end
 end

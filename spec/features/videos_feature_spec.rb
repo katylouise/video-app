@@ -17,8 +17,8 @@ feature 'videos' do
     scenario 'display videos' do
       visit '/videos'
       expect(page).to have_content 'Kathryn Joseph \\\\ the bird (original)'
-      expect(page).to have_selector('img')
-      expect(page).not_to have_content('No videos added yet...')
+      expect(page).to have_selector 'img'
+      expect(page).not_to have_content 'No videos added yet...'
     end
   end
 
@@ -29,21 +29,25 @@ feature 'videos' do
       fill_in 'Link', with: 'https://youtu.be/gId4LfQMqbQ'
       click_button 'Add Video'
       expect(page).to have_content 'Kathryn Joseph \\\\ the bird (original)'
-      expect(page).to have_selector('img')
+      expect(page).to have_selector 'img'
       expect(current_path).to eq '/videos'
     end
   end
 
   context 'viewing videos' do
-    scenario 'allows a user to view a video on Youtube' do
+    before do
       Capybara.current_driver = :selenium
       visit '/videos'
       click_link 'Add a video'
       fill_in 'Link', with: 'https://youtu.be/gId4LfQMqbQ'
       click_button 'Add Video'
+    end
+
+    scenario 'allows a user to view a video on Youtube' do
+
       find('.video-thumbnail').click
       within_window(switch_to_window(windows.last)) do
-        expect(current_url).to eq("https://www.youtube.com/watch?v=gId4LfQMqbQ")
+        expect(current_url).to eq "https://www.youtube.com/watch?v=gId4LfQMqbQ"
       end
       Capybara.use_default_driver
     end
@@ -55,7 +59,7 @@ feature 'videos' do
       visit '/videos'
       click_link 'Delete video'
       expect(page).not_to have_content 'Kathryn Joseph \\\\ the bird (original)'
-      expect(page).not_to have_selector('img')
+      expect(page).not_to have_selector 'img'
     end
   end
 end

@@ -28,6 +28,7 @@ feature 'videos' do
       click_link 'Add a video'
       fill_in 'Link', with: 'https://youtu.be/gId4LfQMqbQ'
       click_button 'Add Video'
+      expect(page).to have_content 'Video added!'
       expect(page).to have_content 'Kathryn Joseph \\\\ the bird (original)'
       expect(page).to have_selector 'img'
       expect(current_path).to eq '/videos'
@@ -44,7 +45,6 @@ feature 'videos' do
     end
 
     scenario 'allows a user to view a video on Youtube' do
-
       find('.video-thumbnail').click
       within_window(switch_to_window(windows.last)) do
         expect(current_url).to eq "https://www.youtube.com/watch?v=gId4LfQMqbQ"
@@ -54,10 +54,10 @@ feature 'videos' do
   end
 
   context 'deleting videos' do
-
     scenario 'removes a video when a user clicks the delete link' do
       visit '/videos'
       click_link 'Delete video'
+      expect(page).to have_content 'Video deleted'
       expect(page).not_to have_content 'Kathryn Joseph \\\\ the bird (original)'
       expect(page).not_to have_selector 'img'
     end

@@ -11,6 +11,7 @@ class VideosController < ApplicationController
   def create
     @video = Video.new(video_params)
     if @video.save
+      flash[:notice] = 'Video added!'
       redirect_to videos_path
     else
       render[:new]

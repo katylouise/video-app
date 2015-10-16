@@ -35,10 +35,6 @@ feature 'videos' do
   end
 
   context 'viewing videos' do
-    # before do
-    #   video = Video.create(link: 'https://youtu.be/gId4LfQMqbQ')
-    # end
-
     scenario 'allows a user to view a video on Youtube' do
       Capybara.current_driver = :selenium
       visit '/videos'
@@ -50,6 +46,16 @@ feature 'videos' do
         expect(current_url).to eq("https://www.youtube.com/watch?v=gId4LfQMqbQ")
       end
       Capybara.use_default_driver
+    end
+  end
+
+  context 'deleting videos' do
+
+    scenario 'removes a video when a user clicks the delete link' do
+      visit '/videos'
+      click_link 'Delete video'
+      expect(page).not_to have_content 'Kathryn Joseph \\\\ the bird (original)'
+      expect(page).not_to have_selector('img')
     end
   end
 end

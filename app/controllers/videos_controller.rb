@@ -9,11 +9,16 @@ class VideosController < ApplicationController
   end
 
   def create
-    @video = Video.create(video_params)
-    redirect_to videos_path
+    @video = Video.new(video_params)
+    if @video.save
+      redirect_to videos_path
+    else
+      render[:new]
+    end
   end
 
   def video_params
     params.require(:video).permit(:link, :title)
   end
+
 end

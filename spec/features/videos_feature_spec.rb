@@ -18,6 +18,7 @@ feature 'videos' do
       visit '/videos'
       expect(page).to have_content 'Kathryn Joseph - The Bird'
       expect(page).to have_selector('img')
+      expect(page).not_to have_content('No videos added yet...')
     end
   end
 
@@ -31,6 +32,15 @@ feature 'videos' do
       expect(page).to have_content 'Kathryn Joseph - The Bird'
       expect(page).to have_selector('img')
       expect(current_path).to eq '/videos'
+    end
+  end
+
+  context 'viewing videos' do
+    let(:video){ Video.create(link: 'https://youtu.be/gId4LfQMqbQ', title: 'Kathryn Joseph - The Bird') }
+
+    scenario 'lets a user view a video' do
+      visit '/videos'
+
     end
   end
 end

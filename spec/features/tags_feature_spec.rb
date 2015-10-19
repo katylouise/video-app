@@ -1,11 +1,8 @@
 require 'rails_helper'
 
 feature 'tagging' do
-  before do
-    create(:video)
-  end
-
   scenario 'a user can add a single tag to a video' do
+    create(:video)
     visit '/videos'
     click_link 'Tag video'
     fill_in 'Name', with: 'music'
@@ -14,10 +11,13 @@ feature 'tagging' do
   end
 
   scenario 'a user can add multiple tags to a video' do
+    video = create(:video)
     visit '/videos'
     click_link 'Tag video'
     fill_in 'Name', with: 'music scottish'
     click_button 'Add Tag'
     expect(page).to have_content('music scottish')
+    expect(video.tags.map(&:name)).to eq(['music', 'scottish'])
   end
+
 end

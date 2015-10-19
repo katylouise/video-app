@@ -13,4 +13,5 @@ RSpec.describe Video, type: :model do
     video = build(:video, link: 'ABC')
     expect(video).not_to be_valid
   end
+
 end

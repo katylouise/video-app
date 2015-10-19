@@ -1,4 +1,5 @@
 class TagsController < ApplicationController
+
   def new
     @video = Video.find(params[:video_id])
     @tag = Tag.new
@@ -6,7 +7,10 @@ class TagsController < ApplicationController
 
   def create
     @video = Video.find(params[:video_id])
-    @tag = @video.tags.create(tag_params)
+    name_array = tag_params[:name].split(" ")
+    name_array.each do |name|
+      @tag = @video.tags.create(name: name)
+    end
     redirect_to videos_path
   end
 

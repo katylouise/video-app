@@ -53,6 +53,7 @@ group :test do
   gem 'capybara-extensions'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
+  gem 'rspec-collection_matchers'
   gem 'selenium-webdriver'
   gem 'shoulda'
   gem 'shoulda-matchers'

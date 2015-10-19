@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'tagging' do
   before do
-    Video.create(link: 'https://youtu.be/gId4LfQMqbQ')
+    create(:video)
   end
 
   scenario 'a user can add a single tag to a video' do

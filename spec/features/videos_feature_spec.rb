@@ -11,7 +11,7 @@ feature 'videos' do
 
   context 'videos have been added' do
     before do
-      Video.create(link: 'https://youtu.be/gId4LfQMqbQ')
+      create(:video)
     end
 
     scenario 'display videos' do

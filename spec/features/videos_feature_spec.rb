@@ -63,11 +63,7 @@ feature 'videos' do
     end
   end
 
-  context 'viewing tagged videos' do
-    # before do
-
-    # end
-
+  context 'filtering videos' do
     scenario 'a user can filter videos by their tags' do
       yoga_video = create(:yoga_video)
       video = create(:video)

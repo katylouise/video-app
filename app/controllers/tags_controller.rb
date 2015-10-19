@@ -14,10 +14,6 @@ class TagsController < ApplicationController
     redirect_to videos_path
   end
 
-  # def show
-
-  # end
-
   def tag_params
     params.require(:tag).permit(:name)
   end

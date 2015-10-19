@@ -62,12 +62,4 @@ feature 'videos' do
       expect(page).not_to have_selector 'img'
     end
   end
-
-  context 'filtering videos' do
-    before do
-      create(:video)
-    end
-    scenario 'allows a user to filter videos by tag name' do
-    end
-  end
 end

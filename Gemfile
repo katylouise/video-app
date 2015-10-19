@@ -50,6 +50,7 @@ end
 group :test do
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'capybara-extensions'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'selenium-webdriver'

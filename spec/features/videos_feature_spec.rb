@@ -62,4 +62,26 @@ feature 'videos' do
       expect(page).not_to have_selector 'img'
     end
   end
+
+  context 'viewing tagged videos' do
+    # before do
+
+    # end
+
+    scenario 'a user can filter videos by their tags' do
+      yoga_video = create(:yoga_video)
+      video = create(:video)
+      video.tags << tag = create(:music_tag)
+      video.save
+      caribou_video = create(:caribou_video)
+      caribou_video.tags << tag
+      caribou_video.save
+      visit '/videos'
+      fill_in 'search', with: 'music'
+      click_button 'Search'
+      expect(page.has_image?(src: "https://img.youtube.com/vi/#{video.uid}/mqdefault.jpg")).to be(true)
+      expect(page.has_image?(src: "https://img.youtube.com/vi/#{caribou_video.uid}/mqdefault.jpg")).to be(true)
+      expect(page.has_image?(src: "https://img.youtube.com/vi/#{yoga_video.uid}/mqdefault.jpg")).to be(false)
+    end
+  end
 end

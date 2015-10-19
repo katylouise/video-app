@@ -8,6 +8,7 @@ require 'rspec/rails'
 require 'capybara/rails'
 require 'support/database_cleaner'
 require 'factory_girl_rails'
+require 'capybara-extensions'
 
 ActiveRecord::Migration.maintain_test_schema!
 

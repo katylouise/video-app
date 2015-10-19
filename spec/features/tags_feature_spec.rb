@@ -20,4 +20,9 @@ feature 'tagging' do
     expect(video.tags.map(&:name)).to eq(['music', 'scottish'])
   end
 
+  context 'viewing tagged videos' do
+    scenario 'a user can filter videos by their tags' do
+
+    end
+  end
 end

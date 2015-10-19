@@ -2,7 +2,6 @@ class VideosController < ApplicationController
 
   def index
     if params[:search]
-      @tags = Tag.search(params[:search])
       @videos = Video.includes(:tags).where('tags.name' => params[:search]).all
     else
       @videos = Video.all

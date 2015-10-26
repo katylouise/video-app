@@ -64,20 +64,30 @@ feature 'videos' do
   end
 
   context 'filtering videos' do
-    scenario 'a user can filter videos by their tags' do
-      yoga_video = create(:yoga_video)
-      video = create(:video)
-      video.tags << tag = create(:music_tag)
-      video.save
-      caribou_video = create(:caribou_video)
-      caribou_video.tags << tag
-      caribou_video.save
+    before(:each) do
+      @yoga_video = create(:yoga_video)
+      @video = create(:video)
+      @video.tags << tag = create(:music_tag)
+      @video.save
+      @caribou_video = create(:caribou_video)
+      @caribou_video.tags << tag
+      @caribou_video.save
       visit '/videos'
       fill_in 'search', with: 'music'
       click_button 'Search'
-      expect(page.has_image?(src: "https://img.youtube.com/vi/#{video.uid}/mqdefault.jpg")).to be(true)
-      expect(page.has_image?(src: "https://img.youtube.com/vi/#{caribou_video.uid}/mqdefault.jpg")).to be(true)
-      expect(page.has_image?(src: "https://img.youtube.com/vi/#{yoga_video.uid}/mqdefault.jpg")).to be(false)
+    end
+
+    scenario 'a user can filter videos by their tags' do
+      expect(page.has_image?(src: "https://img.youtube.com/vi/#{@video.uid}/mqdefault.jpg")).to be(true)
+      expect(page.has_image?(src: "https://img.youtube.com/vi/#{@caribou_video.uid}/mqdefault.jpg")).to be(true)
+      expect(page.has_image?(src: "https://img.youtube.com/vi/#{@yoga_video.uid}/mqdefault.jpg")).to be(false)
+    end
+
+    scenario 'after searching a user can return home' do
+      click_link 'Home'
+      expect(page.has_image?(src: "https://img.youtube.com/vi/#{@video.uid}/mqdefault.jpg")).to be(true)
+      expect(page.has_image?(src: "https://img.youtube.com/vi/#{@caribou_video.uid}/mqdefault.jpg")).to be(true)
+      expect(page.has_image?(src: "https://img.youtube.com/vi/#{@yoga_video.uid}/mqdefault.jpg")).to be(true)
     end
   end
 end

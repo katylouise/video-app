@@ -7,5 +7,10 @@ feature 'User can sign in and out' do
       expect(page).to have_link('Sign in')
       expect(page).to have_link('Sign up')
     end
+
+    scenario 'should not see sign out link' do
+      visit '/videos'
+      expect(page).not_to have_link('Sign out')
+    end
   end
 end

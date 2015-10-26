@@ -9,6 +9,8 @@
   %body
     %header
       =link_to "Home", videos_path, class: 'btn'
+      =link_to "Sign in", new_user_session_path
+      =link_to "Sign up", new_user_registration_path
       =form_tag videos_path, :method => 'get' do
         =text_field_tag :search, params[:search], placeholder: 'Filter tags'
         =submit_tag "Search", class: 'button'

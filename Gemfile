@@ -1,9 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'devise'
-gem 'rails-observers'
-gem 'haml'
-gem 'yt'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
 # Use postgresql as the database for Active Record
@@ -34,6 +31,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'omniauth'
+gem 'omniauth-gplus', '~> 2.0'
+gem 'devise'
+gem 'rails-observers'
+gem 'haml'
+gem 'yt'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

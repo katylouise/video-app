@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'devise'
 gem 'rails-observers'
 gem 'haml'
 gem 'yt'
